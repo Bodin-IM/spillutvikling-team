@@ -1,4 +1,5 @@
 import pygame as pg
+from sprites import *
 
 
 class game():
@@ -15,6 +16,8 @@ class game():
         self.allsprites = pg.sprite.Group
         self.enemyGroup = pg.sprite.Group
         self.playerGroup = pg.sprite.Group
+        self.player = Player()
+        self.allsprites.add(self.player)
 
         self.run()
     def run(self):

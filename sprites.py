@@ -1,5 +1,4 @@
 import pygame as pg
-import main
 
 placeholder = True
 placeholderImg = pg.image.load("assets\sprites\placeholder.png")
@@ -17,7 +16,7 @@ class Player(pg.sprite.Sprite):
     def update(self):
         keys = pg.key.get_pressed()
 
-        if keys[pg.K] or keys[pg.K_RIGHT]:
+        if keys[pg.K_d] or keys[pg.K_RIGHT]:
             self.rect.x += 2 * self.speed
         
         if keys[pg.K_a] or keys[pg.K_LEFT]:
