@@ -8,7 +8,7 @@ placeholderImg = pg.image.load("assets\sprites\placeholder.png")
 terrainPlaceHolderImg = pg.image.load("assets\sprites/terrainPlaceholderImg.png")
 wingedDeamonImg = pg.image.load("assets\sprites\wingedDeamon.png")
 wingedDeamonAttackImg = pg.image.load("assets\sprites\wingedDeamonAttack.png")
-fireProjectileImg = pg.image.load("assets\sprites\fireProjectile.png")
+fireProjectileImg = pg.image.load("assets\sprites/fireProjectile.png")
 
 class Player(pg.sprite.Sprite):
     def __init__(self):
