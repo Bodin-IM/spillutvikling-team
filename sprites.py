@@ -23,6 +23,12 @@ class Player(pg.sprite.Sprite):
         if keys[pg.K_a] or keys[pg.K_LEFT]:
             self.rect.x -= self.speed
 
+        if keys[pg.K_s] or keys[pg.K_DOWN]:
+            self.rect.y -= self.speed  
+
+        if keys[pg.K_w] or keys[pg.K_UP]:
+            self.rect.y += self.speed  
+
 class Obstacle(pg.sprite.Sprite):
     def __init__(self):
         pg.sprite.Sprite.__init__(self)
@@ -31,4 +37,4 @@ class Obstacle(pg.sprite.Sprite):
 
         self.game = placeholder 
 
-        hit = pg.spritecollide(self, self.game.placeholder, True)
+        hit = pg.spritecollide(self, self.game.placeholderGroup, True)
