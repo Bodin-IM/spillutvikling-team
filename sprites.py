@@ -1,8 +1,11 @@
 import pygame as pg
+from random import randint
 
 placeholder = True
 placeholderPlayer = pg.image.load("assets\sprites\placeholder.png")
 placeholderObstacle = pg.image.load("assets\sprites\pipe-placeholder.png")
+placeholderImg = pg.image.load("assets\sprites\placeholder.png")
+terrainPlaceHolderImg = pg.image.load("assets\sprites/terrainPlaceholderImg.png")
 
 class Player(pg.sprite.Sprite):
     def __init__(self):
@@ -38,3 +41,15 @@ class Obstacle(pg.sprite.Sprite):
         self.game = placeholder 
 
         hit = pg.spritecollide(self, self.game.placeholderGroup, True)
+class terrain(pg.sprite.Sprite):
+    def __init__(self,game):        
+        pg.sprite.Sprite.__init__(self)        
+        terrainSize = randint(20,100)
+        self.image = pg.transform.scale(terrainPlaceHolderImg,(terrainSize,terrainSize))
+
+        self.rect = self.image.get_rect()
+        self.rect.y = randint(0,game.screenHeight)
+        self.rect.x = randint(0,game.screenWidth)
+
+    def update(self):
+        pass
