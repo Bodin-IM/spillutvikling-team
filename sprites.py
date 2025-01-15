@@ -10,6 +10,9 @@ wingedDeamonImg = pg.image.load("assets\sprites\wingedDeamon.png")
 wingedDeamonAttackImg = pg.image.load("assets\sprites\wingedDeamonAttack.png")
 fireProjectileImg = pg.image.load("assets\sprites/fireProjectile.png")
 
+terrainImg = pg.image.load("assets\sprites/terrainClusterPart.png")
+
+
 class Player(pg.sprite.Sprite):
     def __init__(self):
         pg.sprite.Sprite.__init__(self)
@@ -30,10 +33,10 @@ class Player(pg.sprite.Sprite):
             self.rect.x -= self.speed
 
         if keys[pg.K_s] or keys[pg.K_DOWN]:
-            self.rect.y -= self.speed  
+            self.rect.y += self.speed  
 
         if keys[pg.K_w] or keys[pg.K_UP]:
-            self.rect.y += self.speed  
+            self.rect.y -= self.speed  
 
 class Obstacle(pg.sprite.Sprite):
     def __init__(self):
@@ -45,15 +48,15 @@ class Obstacle(pg.sprite.Sprite):
 
         hit = pg.spritecollide(self, self.game.placeholderGroup, True)
 class terrain(pg.sprite.Sprite):
-    def __init__(self,game):        
+    def __init__(self,game, x, y):
+        self.speed = 10      
         pg.sprite.Sprite.__init__(self)        
-        terrainSize = randint(20,100)
-        self.image = pg.transform.scale(terrainPlaceHolderImg,(terrainSize,terrainSize))
+        terrainSize = randint(20,20)
+        self.image = pg.transform.scale(terrainImg,(terrainSize,terrainSize))
 
         self.rect = self.image.get_rect()
-        self.rect.y = randint(0,game.screenHeight)
-        self.rect.x = randint(0,game.screenWidth)
-
+        self.rect.y = y
+        self.rect.x = x
     def update(self):
         pass
 
@@ -108,3 +111,35 @@ class fireProjectile(pg.sprite.Sprite):
             self.rect.x += self.speedX
 
         hit = pg.sprite.spritecollide(self, self.game.enemygroup, True)
+
+    
+class terrainCluster():
+    def __init__(self,game, amount):
+        self.blocks = []
+        self.speed = 5
+        origX = 500
+        x = origX
+        y = -1000
+        lineAmount = 0
+        newLine = 0
+        for i in range(0,amount):
+            block = terrain(game, x, y)
+            
+            x += block.image.get_width()
+            
+
+            if newLine <= 0:
+                y += block.image.get_height()
+                x = origX - block.image.get_width() * lineAmount //2
+                lineAmount += 1
+                newLine = lineAmount
+                
+            newLine -= 1
+
+            self.blocks.append(block)
+            game.allsprites.add(block)
+            
+    def update(self):
+        for block in self.blocks:
+            block.rect.y += self.speed
+

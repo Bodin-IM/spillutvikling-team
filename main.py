@@ -10,6 +10,7 @@ class game():
         self.clock = pg.time.Clock()
         self.screen = pg.display.set_mode((self.screenWidth,self.screenHeight))
         self.new()
+        
 
 
     def new(self):
@@ -18,8 +19,9 @@ class game():
         self.playerGroup = pg.sprite.Group()
         self.player = Player()
         self.allsprites.add(self.player)
-        self.terrain = terrain(self)
-        self.allsprites.add(self.terrain)
+   
+        self.cluster = terrainCluster(self, 100)
+
         self.run()
 
     def run(self):
@@ -30,6 +32,8 @@ class game():
                 if event.type == pg.QUIT:
                     playing = False
             self.allsprites.update()
+            self.cluster.update()
+            self.screen.fill("black")
             self.allsprites.draw(self.screen)
 
             pg.display.update()
