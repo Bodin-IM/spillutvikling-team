@@ -34,11 +34,4 @@ class game():
 
             pg.display.update()
 
-
-
-
-
-
-
 g = game()
-

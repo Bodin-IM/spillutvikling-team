@@ -108,5 +108,3 @@ class fireProjectile(pg.sprite.Sprite):
             self.rect.x += self.speedX
 
         hit = pg.sprite.spritecollide(self, self.game.enemygroup, True)
-
-    
